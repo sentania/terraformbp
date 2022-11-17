@@ -3,10 +3,15 @@ provider "aws" {
     region="us-east-2"
 }
 
+data "aws_vpc" "selected" {
+  name = "vmw-aws-ohio"
+}
+
 resource "aws_instance" "machine1" {
     ami           = "ami-04b9e92b5572fa0d1"
     instance_type = "t2.micro"
     availability_zone = "us-east-2b"
+    vpc_id =  data.aws_vpc.selected.id
     tags = {
       "type" = var.myTag
     }
@@ -16,6 +21,7 @@ resource "aws_instance" "machine2" {
     ami           = "ami-04b9e92b5572fa0d1"
     instance_type = "t2.micro"
     availability_zone = "us-east-2b"
+    vpc_id =  data.aws_vpc.selected.id
     tags = {
       "type" = var.myTag
     }
