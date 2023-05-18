@@ -8,21 +8,21 @@ provider "vsphere" {
 }
 
 data "vsphere_datacenter" "dc" {
-  name = "sc2dc03"
+  name = "lab-comp01"
 }
 
 data "vsphere_datastore" "datastore" {
-  name          = "sc2c01vsan01"
+  name          = "Cluster1-DSC"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
 data "vsphere_resource_pool" "pool" {
-  name          = "pre-prod-staging"
+  name          = "lab-comp01-cl01"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
 data "vsphere_network" "network" {
-  name          = "web"
+  name          = "netseg01"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
